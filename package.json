@@ -1,0 +1,23 @@
+{
+  "name": "md2img",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"bun run dev:server\" \"bun run dev:web\"",
+    "dev:web": "cd apps/web && bun run dev",
+    "dev:server": "cd apps/server && bun run dev",
+    "build:web": "cd apps/web && bun run build",
+    "typecheck:web": "cd apps/web && bun run type-check"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "concurrently": "^9.2.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
