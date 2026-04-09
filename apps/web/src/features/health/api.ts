@@ -1,17 +1,16 @@
+import { eden } from '@/lib/eden'
 import type { HealthResponse } from '@md2img/shared'
 
 export async function getHealth(): Promise<HealthResponse> {
-  const baseUrl = import.meta.env.VITE_API_BASE_URL
+  const { data, error } = await eden.api.health.get()
 
-  if (!baseUrl) {
-    throw new Error('VITE_API_BASE_URL is not set')
+  if (error) {
+    throw new Error(`HTTP ${error.status}`)
   }
 
-  const res = await fetch(`${baseUrl}/api/health`)
-
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status}`)
+  if (!data) {
+    throw new Error('health response is empty')
   }
 
-  return res.json() as Promise<HealthResponse>
+  return data
 }

@@ -5,20 +5,21 @@
     "vite.config.*",
     "vitest.config.*",
     "cypress.config.*",
-    "playwright.config.*",
-    "eslint.config.*"
+    "playwright.config.*"
   ],
   "compilerOptions": {
+    "composite": true,
+
     // Most tools use transpilation instead of Node.js's native type-stripping.
     // Bundler mode provides a smoother developer experience.
     "module": "preserve",
     "moduleResolution": "bundler",
 
+    // 继承的根 tsconfig 使用了 baseUrl，TS 6 下需要显式静音弃用提示。
+    "ignoreDeprecations": "6.0",
+
     // Include Node.js types and avoid accidentally including other `@types/*` packages.
     "types": ["node"],
-
-    // Disable emitting output during `vue-tsc --build`, which is used for type-checking only.
-    "noEmit": true,
 
     // `vue-tsc --build` produces a .tsbuildinfo file for incremental type-checking.
     // Specified here to keep it out of the root directory.

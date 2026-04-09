@@ -1,10 +1,15 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "../../packages/shared/src/**/*"],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
+    "composite": true,
+
     // Extra safety for array and object lookups, but may have false positives.
     "noUncheckedIndexedAccess": true,
+
+    // 继承的根 tsconfig 使用了 baseUrl，TS 6 下需要显式静音弃用提示。
+    "ignoreDeprecations": "6.0",
 
     // Path mapping for cleaner imports.
     "paths": {
