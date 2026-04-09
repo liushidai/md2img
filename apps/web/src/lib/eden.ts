@@ -1,5 +1,9 @@
 import { treaty } from '@elysiajs/eden'
-import type { HealthResponse } from '@md2img/shared'
+import type {
+  CurrentDocument,
+  HealthResponse,
+  UpdateCurrentDocumentRequest,
+} from '@md2img/shared'
 
 type EdenError = {
   status: number
@@ -14,6 +18,14 @@ type EdenClient = {
   api: {
     health: {
       get: () => Promise<EdenResponse<HealthResponse>>
+    }
+    documents: {
+      current: {
+        get: () => Promise<EdenResponse<CurrentDocument>>
+        put: (
+          body: UpdateCurrentDocumentRequest,
+        ) => Promise<EdenResponse<CurrentDocument>>
+      }
     }
   }
 }

@@ -33,6 +33,9 @@ apps/web/eslint.config.d.ts
 apps/web/vite.config.js
 apps/web/vite.config.d.ts
 
+# sqlite runtime files
+apps/server/*.sqlite
+
 # IntelliJ based IDEs
 .idea
 

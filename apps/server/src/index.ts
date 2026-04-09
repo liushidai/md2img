@@ -1,13 +1,17 @@
 import { Elysia } from 'elysia'
 import { cors } from '@elysiajs/cors'
+import { documentRoutes } from './modules/document'
 import { healthRoutes } from './modules/health'
+
+const devOrigins = [/^http:\/\/localhost:\d+$/, /^http:\/\/127\.0\.0\.1:\d+$/]
 
 const app = new Elysia()
   .use(
     cors({
-      origin: 'http://localhost:5173',
+      origin: devOrigins,
     }),
   )
+  .use(documentRoutes)
   .use(healthRoutes)
   .listen(3000)
 
