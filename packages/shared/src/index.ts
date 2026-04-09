@@ -4,16 +4,31 @@ export type HealthResponse = {
     time: string
 }
 
-export type CurrentDocument = {
-    markdownContent: string
-    createdAt: string | null
-    updatedAt: string | null
+export type DocumentSummary = {
+    id: number
+    title: string
+    createdAt: string
+    updatedAt: string
 }
 
-export type GetCurrentDocumentResponse = CurrentDocument
-
-export type UpdateCurrentDocumentRequest = {
+export type DocumentDetail = DocumentSummary & {
     markdownContent: string
 }
 
-export type UpdateCurrentDocumentResponse = CurrentDocument
+export type ListDocumentsResponse = DocumentSummary[]
+
+export type GetDocumentResponse = DocumentDetail
+
+export type CreateDocumentRequest = {
+    title?: string
+    markdownContent?: string
+}
+
+export type CreateDocumentResponse = DocumentDetail
+
+export type UpdateDocumentRequest = {
+    title: string
+    markdownContent: string
+}
+
+export type UpdateDocumentResponse = DocumentDetail
