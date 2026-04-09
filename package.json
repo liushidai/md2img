@@ -8,10 +8,23 @@
   ],
   "scripts": {
     "dev": "concurrently \"bun run dev:server\" \"bun run dev:web\"",
-    "dev:web": "cd apps/web && bun run dev",
-    "dev:server": "cd apps/server && bun run dev",
-    "build:web": "cd apps/web && bun run build",
-    "typecheck:web": "cd apps/web && bun run type-check"
+    "dev:web": "bun run --cwd apps/web dev",
+    "dev:server": "bun run --cwd apps/server dev",
+    "start:server": "bun run --cwd apps/server src/index.ts",
+    "build": "bun run build:web && bun run build:server",
+    "build:web": "bun run --cwd apps/web build",
+    "build:server": "bun build apps/server/src/index.ts --outdir apps/server/dist --target bun",
+    "build-only:web": "bun run --cwd apps/web build-only",
+    "clean": "bun run clean:web && bun run clean:server",
+    "clean:web": "rm -rf apps/web/dist apps/web/tsconfig.tsbuildinfo",
+    "clean:server": "rm -rf apps/server/dist",
+    "typecheck:web": "bun run --cwd apps/web type-check",
+    "typecheck:server": "bunx tsc --noEmit -p apps/server/tsconfig.json",
+    "lint:web": "bun run --cwd apps/web lint",
+    "format:web": "bun run --cwd apps/web format",
+    "preview:web": "bun run --cwd apps/web preview",
+    "check:server": "bun run typecheck:server",
+    "check:web": "bun run typecheck:web && bun run lint:web"
   },
   "devDependencies": {
     "@types/bun": "latest",
